@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyspark_utils",
-    version="1.1",
+    version="1.2",
     license="Apache License Version 2.0",
     author="Xiangquan Xiao",
     author_email="xiaoxiangquan@gmail.com",

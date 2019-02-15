@@ -1,26 +1,22 @@
-#!/usr/bin/env python
 """The missing PySpark operators."""
+#!/usr/bin/env python
 
-def map_key(func):
+def do_key(func):
     """Return a function which transforms the key."""
-    def func_wrapper(key_value):
-        """The function which transforms the key."""
-        key, value = key_value
-        return func(key), value
-    return func_wrapper
+    return (lambda kv: (func(kv[0]), kv[1]))
+
+def do_tuple(func):
+    """Return a function which transforms a tuple."""
+    return (lambda kv: func(*kv))
 
 def filter_key(func):
     """Return a function which filters the key."""
-    def func_wrapper(key_value):
-        """The function which filters the key."""
-        key, _ = key_value
-        return func(key)
-    return func_wrapper
+    return (lambda kv: func(kv[0]))
 
 def filter_value(func):
     """Return a function which filters the value."""
-    def func_wrapper(key_value):
-        """The function which filters the value."""
-        _, value = key_value
-        return func(value)
-    return func_wrapper
+    return (lambda kv: func(kv[1]))
+
+def swap_kv():
+    """An operator to swap a key-value tuple."""
+    return (lambda kv: (kv[1], kv[0]))
