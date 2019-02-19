@@ -20,6 +20,10 @@ def filter_value(func):
     """Return a function which filters the value."""
     return (lambda kv: func(kv[1]))
 
+def filter_path(patterns):
+    """Return a function which filters paths by fnmatch style patterns."""
+    return (lambda path: next((True for pat in patterns if fnmatch.fnmatch(path, pat)), False))
+
 def identity(elem):
     """Return the argument itself."""
     return elem

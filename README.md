@@ -39,6 +39,9 @@ pair_rdd.filter(spark_op.filter_key(lambda key: true_or_false))
 # RDD<key, value>  ->  RDD<key, value> if func(value)
 pair_rdd.filter(spark_op.filter_value(lambda value: true_or_false))
 
+# RDD<path>  ->  RDD<path> if path matches any given fnmatch-style patterns
+rdd.filter(spark_op.filter_path(['*.txt', '*.csv', 'path/a.???']))
+
 # RDD<element>  ->  RDD<element, element>
 rdd.keyBy(spark_op.identity)
 
