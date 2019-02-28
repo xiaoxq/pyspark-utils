@@ -39,6 +39,9 @@ pair_rdd.filter(spark_op.filter_key(lambda key: true_or_false))
 # RDD<key, value>  ->  RDD<key, value> if func(value)
 pair_rdd.filter(spark_op.filter_value(lambda value: true_or_false))
 
+# RDD<iteratable>  ->  RDD<tuple_or_list> with transformed values.
+rdd.map(spark_op.do_elems(lambda elem: new_elem))
+
 # RDD<path>  ->  RDD<path> if path matches any given fnmatch-style patterns
 rdd.filter(spark_op.filter_path(['*.txt', '*.csv', 'path/a.???']))
 
@@ -47,6 +50,9 @@ rdd.keyBy(spark_op.identity)
 
 # RDD<key, value>   ->   RDD<key, value> with keys in key_rdd
 subset_pair_rdd = spark_op.filter_keys(pair_rdd, key_rdd)
+
+# RDD<key, value>   ->   RDD<key, value> with keys in whitelist and not in blacklist
+subset_pair_rdd = spark_op.filter_keys(pair_rdd, whitelist_key_rdd, blacklist_key_rdd)
 
 # RDD<key, value>   ->   RDD<key, value> with keys not in key_rdd
 subset_pair_rdd = spark_op.substract_keys(pair_rdd, key_rdd)
