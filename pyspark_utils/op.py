@@ -51,3 +51,7 @@ def filter_keys(pair_rdd, whitelist_key_rdd, blacklist_key_rdd=None):
 def swap_kv(kv):
     """Swap a key-value tuple."""
     return (kv[1], kv[0])
+
+def not_none(elem):
+    """Check if an element is not None."""
+    return elem is not None

@@ -49,11 +49,15 @@ rdd.filter(spark_op.filter_path(['*.txt', '*.csv', 'path/a.???']))
 rdd.keyBy(spark_op.identity)
 
 # RDD<key, value>   ->   RDD<key, value> with keys in key_rdd
-subset_pair_rdd = spark_op.filter_keys(pair_rdd, key_rdd)
+spark_op.filter_keys(pair_rdd, key_rdd)
 
 # RDD<key, value>   ->   RDD<key, value> with keys in whitelist and not in blacklist
-subset_pair_rdd = spark_op.filter_keys(pair_rdd, whitelist_key_rdd, blacklist_key_rdd)
+spark_op.filter_keys(pair_rdd, whitelist_key_rdd, blacklist_key_rdd)
 
 # RDD<key, value>   ->   RDD<key, value> with keys not in key_rdd
-subset_pair_rdd = spark_op.substract_keys(pair_rdd, key_rdd)
+spark_op.substract_keys(pair_rdd, key_rdd)
+
+# Upcoming in next version.
+# RDD<element>   ->   RDD<element> where element is not None
+rdd.filter(spark_op.not_none)
 ```
