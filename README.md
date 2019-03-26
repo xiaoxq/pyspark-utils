@@ -60,4 +60,7 @@ spark_op.substract_keys(pair_rdd, key_rdd)
 # Upcoming in next version.
 # RDD<element>   ->   RDD<element> where element is not None
 rdd.filter(spark_op.not_none)
+
+# RDD<key>   ->   RDD<key, value>
+rdd.map(spark_op.value_by(lambda key: value))
 ```
