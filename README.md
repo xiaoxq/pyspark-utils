@@ -57,10 +57,12 @@ spark_op.filter_keys(pair_rdd, whitelist_key_rdd, blacklist_key_rdd)
 # RDD<key, value>   ->   RDD<key, value> with keys not in key_rdd
 spark_op.substract_keys(pair_rdd, key_rdd)
 
-# Upcoming in next version.
 # RDD<element>   ->   RDD<element> where element is not None
 rdd.filter(spark_op.not_none)
 
 # RDD<key>   ->   RDD<key, value>
 rdd.map(spark_op.value_by(lambda key: value))
+
+# Print an RDD nicely with name, count and first element.
+spark_op.log_rdd(rdd, "MyRDD", glog.info)
 ```

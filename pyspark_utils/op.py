@@ -59,3 +59,11 @@ def not_none(elem):
 def value_by(func):
     """Return a function which generate value from the element."""
     return lambda key: (key, func(key))
+
+def log_rdd(rdd, rdd_name='RDD', log_func=print):
+    """Pretty log an RDD, then return the rdd itself."""
+    rdd = rdd.cache()
+    elem_count = rdd.count()
+    log_func('{} has {} elements: [{}, ...]'.format(
+        rdd_name, elem_count, rdd.first() if elem_count > 0 else 'None'))
+    return rdd
