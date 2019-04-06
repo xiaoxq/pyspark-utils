@@ -12,11 +12,13 @@ def do_tuple(func):
     """Return a function which transforms a tuple."""
     return lambda a_tuple: func(*a_tuple)
 
-def do_elems(func):
+def do_tuple_elems(func):
     """Return a function which transforms all elements of the input."""
-    return (lambda elems:
-        (func(elem) for elem in elems) if isinstance(elems, tuple) else
-        [func(elem) for elem in elems])
+    return lambda elems: (func(elem) for elem in elems)
+
+def do_list_elems(func):
+    """Return a function which transforms all elements of the input."""
+    return lambda elems: [func(elem) for elem in elems]
 
 def filter_key(func):
     """Return a function which filters the key."""
@@ -60,10 +62,14 @@ def value_by(func):
     """Return a function which generate value from the element."""
     return lambda key: (key, func(key))
 
-def log_rdd(rdd, rdd_name='RDD', log_func=print):
+def log_rdd(rdd, rdd_name='RDD', log_func=None):
     """Pretty log an RDD, then return the rdd itself."""
     rdd = rdd.cache()
     elem_count = rdd.count()
-    log_func('{} has {} elements: [{}, ...]'.format(
-        rdd_name, elem_count, rdd.first() if elem_count > 0 else 'None'))
+    msg = '{} has {} elements: [{}, ...]'.format(
+        rdd_name, elem_count, rdd.first() if elem_count > 0 else 'None')
+    if log_func is not None:
+        log_func(msg)
+    else:
+        print (msg)
     return rdd

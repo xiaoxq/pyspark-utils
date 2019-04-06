@@ -40,7 +40,8 @@ pair_rdd.filter(spark_op.filter_key(lambda key: true_or_false))
 pair_rdd.filter(spark_op.filter_value(lambda value: true_or_false))
 
 # RDD<iteratable>  ->  RDD<tuple_or_list> with transformed values.
-rdd.map(spark_op.do_elems(lambda elem: new_elem))
+rdd.map(spark_op.do_tuple_elems(lambda elem: new_elem))
+rdd.map(spark_op.do_list_elems(lambda elem: new_elem))
 
 # RDD<path>  ->  RDD<path> if path matches any given fnmatch-style patterns
 rdd.filter(spark_op.filter_path(['*.txt', '*.csv', 'path/a.???']))
