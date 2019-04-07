@@ -66,4 +66,8 @@ rdd.map(spark_op.value_by(lambda key: value))
 
 # Print an RDD nicely with name, count and first element.
 spark_op.log_rdd(rdd, "MyRDD", glog.info)
+
+####################### Next version #######################
+# New.
+spark_op.cache_and_log('MyRDD', rdd)
 ```
