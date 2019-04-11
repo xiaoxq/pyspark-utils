@@ -3,8 +3,6 @@
 
 import operator
 
-import colored_glog as glog
-
 
 def do_key(func):
     """Return a function which transforms the key."""
@@ -63,26 +61,3 @@ def not_none(elem):
 def value_by(func):
     """Return a function which generate value from the element."""
     return lambda key: (key, func(key))
-
-def cache_and_log(rdd_name, rdd, log_func=glog.info):
-    """Cache and pretty log an RDD, then return the rdd itself."""
-    rdd = rdd.cache()
-    elem_count = rdd.count()
-    if elem_count > 0:
-        log_func('{} has {} elements: [{}, ...]'.format(rdd_name, elem_count, rdd.first()))
-    else:
-        log_func('{} has 0 elements'.format(rdd_name))
-    return rdd
-
-# To be retired.
-def log_rdd(rdd, rdd_name='RDD', log_func=None):
-    """Pretty log an RDD, then return the rdd itself."""
-    rdd = rdd.cache()
-    elem_count = rdd.count()
-    msg = '{} has {} elements: [{}, ...]'.format(
-        rdd_name, elem_count, rdd.first() if elem_count > 0 else 'None')
-    if log_func is not None:
-        log_func(msg)
-    else:
-        print (msg)
-    return rdd

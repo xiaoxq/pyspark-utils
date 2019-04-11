@@ -15,8 +15,8 @@ pip install pyspark-utils
 ```python
 import pyspark_utils.helper as spark_helper
 
-# A SparkContext named as "TestPipeline".
-spark_context = spark_helper.get_context('TestPipeline')
+# Nicely show rdd count and 3 items.
+rdd = spark_helper.cache_and_log('MyRDD', rdd, 3)
 ```
 
 ### op
@@ -63,11 +63,4 @@ rdd.filter(spark_op.not_none)
 
 # RDD<key>   ->   RDD<key, value>
 rdd.map(spark_op.value_by(lambda key: value))
-
-# Print an RDD nicely with name, count and first element.
-spark_op.log_rdd(rdd, "MyRDD", glog.info)
-
-####################### Next version #######################
-# New.
-spark_op.cache_and_log('MyRDD', rdd)
 ```

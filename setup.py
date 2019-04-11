@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyspark_utils",
-    version="1.6.0",
+    version="1.7.0",
     license="Apache License Version 2.0",
     author="Xiangquan Xiao",
     author_email="xiaoxiangquan@gmail.com",
@@ -24,6 +24,5 @@ setuptools.setup(
     ],
     install_requires=[
         "colored-glog",
-        "pyspark",
     ],
 )
