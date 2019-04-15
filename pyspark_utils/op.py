@@ -1,6 +1,7 @@
 """The missing PySpark operators."""
 #!/usr/bin/env python
 
+import fnmatch
 import operator
 
 
