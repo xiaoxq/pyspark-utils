@@ -1,10 +1,10 @@
 """Spark related utils."""
 #!/usr/bin/env python
 
-import colored_glog as glog
+from absl import logging
 
 
-def cache_and_log(rdd_name, rdd, show_items=1, info_func=glog.info, warn_func=glog.warn):
+def cache_and_log(rdd_name, rdd, show_items=1, info_func=logging.info, warn_func=logging.warning):
     """Cache and pretty log an RDD, then return the rdd itself."""
     rdd = rdd.cache()
     count = rdd.count()
